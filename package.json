@@ -12,7 +12,7 @@
     "@types/react-dom": "^17.0.0",
     "fuse.js": "^6.4.3",
     "fuzzy-search": "^3.2.1",
-    "osrs-trade-stats": "0.0.6",
+    "osrs-trade-stats": "0.0.8",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-router-dom": "^5.2.0",
