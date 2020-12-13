@@ -6,25 +6,10 @@ import {
   Switch,
   Route,
   Link,
-  useParams,
 } from 'react-router-dom';
 import fuzzySearch from '../../store/search';
+import Item from '../item/ItemDetails';
 import SearchForm from './Form';
-
-const Child = () => {
-  // We can use the `useParams` hook here to access
-  // the dynamic pieces of the URL.
-  const { id } = useParams<any>();
-
-  return (
-    <div>
-      <h3>
-        ID:
-        {id}
-      </h3>
-    </div>
-  );
-};
 
 const SearchResultTable = () => {
   const [results, setResults] = useState<any>();
@@ -39,10 +24,9 @@ const SearchResultTable = () => {
   const ResultsDiv = (
     <div>
       <Router>
-
         {results}
         <Switch>
-          <Route path="/item/:id" children={<Child />} />
+          <Route path="/item/:id" children={<Item />} />
         </Switch>
       </Router>
     </div>
