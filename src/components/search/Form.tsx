@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
-const SearchForm = ({ onSearch } : {onSearch : (text: Readonly<{ text: string; }>) => void} ) => {
-  const [query, setQuery] = useState({ text: "" });
+// eslint-disable-next-line no-unused-vars
+const SearchForm = ({ onSearch } : {onSearch : (text: Readonly<{ text: string; }>) => void}) => {
+  const [query, setQuery] = useState({ text: '' });
 
   function handleChange(event: { preventDefault: () => void; target: { value: any; }; }) {
     event.preventDefault();
@@ -23,5 +24,5 @@ const SearchForm = ({ onSearch } : {onSearch : (text: Readonly<{ text: string; }
       </button>
     </form>
   );
-}
-export default SearchForm
+};
+export default SearchForm;
