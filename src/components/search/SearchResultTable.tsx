@@ -12,19 +12,23 @@ import Item from '../item/ItemDetails';
 import SearchForm from './Form';
 
 const SearchResultTable = () => {
-  const [results, setResults] = useState<any>();
-  const listFromSearchResult = (result : any) => result.map((item : any, i : any) => (
-    <li key={i}>
-      <Link to={`/item/${item.item.id}`}>
-        {item.item.name}
-      </Link>
-    </li>
-  ));
+  const [filteredItems, setFilteredItems] = useState<any[]>([]);
+  const handleSearchText = (text: string) => setFilteredItems(fuzzySearch(text));
+
+  const listFromSearchResult = (result : any) => result.map(
+    (item : { item : { id : number, name : string}}, i : number) => (
+      <li key={i}>
+        <Link to={`/item/${item.item.id}`}>
+          {item.item.name}
+        </Link>
+      </li>
+    ),
+  );
 
   const ResultsDiv = (
     <div>
       <Router>
-        {results}
+        {listFromSearchResult(filteredItems)}
         <Switch>
           <Route path="/item/:id" children={<Item />} />
         </Switch>
@@ -34,7 +38,7 @@ const SearchResultTable = () => {
 
   return (
     <div className="App">
-      <SearchForm onSearch={(text) => setResults(listFromSearchResult(fuzzySearch(text.text)))} />
+      <SearchForm onSearch={(text) => handleSearchText(text.text)} />
       {ResultsDiv}
     </div>
   );

@@ -23,26 +23,27 @@ function Item() {
     // });
   }, []);
 
-  // const data = (
-  //   <table>
-  //     <tbody>
-  //       <tr>
-  //         <td>item</td>
-  //         <td>price</td>
-  //       </tr>
-  //       <tr>
-  //         <td>{itemDetails?.name}</td>
-  //         <td>{itemDetails?.current.price}</td>
-  //       </tr>
-  //     </tbody>
-  //   </table>
-  // );
+  const data = (
+    <table>
+      <tbody>
+        <tr>
+          <td>item</td>
+          <td>price</td>
+        </tr>
+        <tr>
+          <td>{itemDetails?.name}</td>
+          <td>{itemDetails?.current.price}</td>
+        </tr>
+      </tbody>
+    </table>
+  );
 
   return (
     <div>
       <h3>
         ID:
         {id}
+        {data}
       </h3>
     </div>
   );
