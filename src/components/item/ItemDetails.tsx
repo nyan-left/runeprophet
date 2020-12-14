@@ -7,57 +7,45 @@ import {
 } from 'react-router-dom';
 import * as OSRS from 'osrs-trade-stats';
 
-// type Await<T> = T extends {
-//     then(onfulfilled?: (value: infer U) => unknown): unknown;
-// } ? U : T;
+type Await<T> = T extends {
+    then(onfulfilled?: (value: infer U) => unknown): unknown;
+} ? U : T;
 
-// type ItemDetails = Await<ReturnType<typeof OSRS.getFromOfficialAPI>>;
+type TradeStatsDetails = Await<ReturnType<typeof OSRS.getTradeVolume>>;
 
-// const DataLoader = (props : {itemID : number}) => {
-//   const [isLoading, setIsLoading] = useState(false);
-//   const [data, setData] = useState<ItemDetails>();
-//   const { itemID } = props;
+function DataLoader(props :{ id: number }) {
+  const [isLoading, setIsLoading] = useState(true);
+  const [data, setData] = useState<TradeStatsDetails>();
+  const { id } = props;
+  useEffect(() => {
+    let didCancel = false;
+    async function fetchData() {
+      !didCancel && setIsLoading(true) && id;
+      try {
+        const response = await OSRS.getTradeVolume(id);
+        !didCancel && setData(response);
+      } catch (error) {
+        // Do something with error
+      } finally {
+        !didCancel && setIsLoading(false);
+      }
+    }
+    fetchData();
+    return () => { didCancel = true; };
+  }, [id]);
 
-//   useEffect(() => {
-//     let didCancel = false;
-//     async function fetchData() {
-//       !didCancel && setIsLoading(true);
-//       try {
-//         const response = await OSRS.getFromOfficialAPI(itemID);
-//         !didCancel && setData(response);
-//       } catch (error) {
-//         // Do something with error
-//       } finally {
-//         !didCancel && setIsLoading(false);
-//       }
-//     }
-//     fetchData();
-//     return () => { didCancel = true; };
-//   }, [props.itemID]);
-
-//   return isLoading ? (
-//     <tr>
-//       <td>Loading</td>
-//       <td>Loading</td>
-//     </tr>
-//   ) : (
-//     <tr>
-//       <td>{data?.name}</td>
-//       <td>{data?.current.price}</td>
-//       <td>{data?.current}</td>
-//     </tr>
-//   );
-// };
+  return isLoading ? <div>Loading</div> : (
+    <div>
+      {data?.map((item) => <small key={item.dateString}>{`${item.dateString} trade-volume: ${item.tradeVolume}, `}</small>)}
+    </div>
+  );
+}
 
 function Item() {
   const { id } = useParams<any>();
-
   return (
     <div>
-      <h3>
-        ID:
-        {id}
-      </h3>
+      <DataLoader id={id} />
     </div>
   );
 }

@@ -29,14 +29,13 @@ type Await<T> = T extends {
     then(onfulfilled?: (value: infer U) => unknown): unknown;
 } ? U : T;
 
+type ItemDetails = Await<ReturnType<typeof OSRS.getFromOfficialAPI>>;
+
 const useStyles = makeStyles({
   table: {
     minWidth: 100,
   },
 });
-
-type ItemDetails = Await<ReturnType<typeof OSRS.getFromOfficialAPI>>;
-
 function DataLoader(props : {itemsList : { id: number; name: string; }[]}) : any {
   const [isLoading, setIsLoading] = useState(false);
   const [data, setData] = useState<ItemDetails[]>([]);
