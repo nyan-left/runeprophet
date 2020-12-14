@@ -1,3 +1,4 @@
+/* eslint-disable react/destructuring-assignment */
 /* eslint-disable no-unused-expressions */
 /* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from 'react';
@@ -31,7 +32,7 @@ const DataLoader = (props : {itemID : number}) => {
     }
     fetchData();
     return () => { didCancel = true; };
-  }, []);
+  }, [props.itemID]);
 
   return isLoading ? (
     <tr>
