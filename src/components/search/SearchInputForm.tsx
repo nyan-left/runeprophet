@@ -6,7 +6,7 @@ import Button from '@material-ui/core/Button';
 import { Input } from '@material-ui/core';
 
 // eslint-disable-next-line no-unused-vars
-const SearchForm = ({ onSearch } : {onSearch : (text: string) => void}) => {
+const SearchInputForm = ({ onSearch } : {onSearch : (text: string) => void}) => {
   const [search, setSearch] = useState('');
 
   return (
@@ -25,4 +25,4 @@ const SearchForm = ({ onSearch } : {onSearch : (text: string) => void}) => {
   );
 };
 
-export default SearchForm;
+export default SearchInputForm;

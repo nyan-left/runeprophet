@@ -4,11 +4,11 @@
 import React, { useEffect, useState } from 'react';
 import './App.css';
 import * as OSRS from 'osrs-trade-stats';
-import SearchResultTable from './components/search/SearchResultTable';
+import SearchResultList from './components/search/SearchResultList';
 
 const App = () => (
   <div className="App">
-    <SearchResultTable />
+    <SearchResultList />
   </div>
 );
 
