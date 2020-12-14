@@ -6,6 +6,10 @@ import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <React.StrictMode>
+    <meta
+      name="viewport"
+      content="minimum-scale=1, initial-scale=1, width=device-width"
+    />
     <App />
   </React.StrictMode>,
   document.getElementById('root'),

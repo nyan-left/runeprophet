@@ -15,15 +15,16 @@ type ItemDetails = Await<ReturnType<typeof OSRS.getFromOfficialAPI>>;
 
 const DataLoader = (props : {itemID : number}) => {
   const [isLoading, setIsLoading] = useState(false);
-  const [data, setData] = useState('');
+  const [data, setData] = useState<ItemDetails>();
+  const { itemID } = props;
 
   useEffect(() => {
     let didCancel = false;
     async function fetchData() {
       !didCancel && setIsLoading(true);
       try {
-        const response = await OSRS.getFromOfficialAPI(props.itemID);
-        !didCancel && setData(response.name);
+        const response = await OSRS.getFromOfficialAPI(itemID);
+        !didCancel && setData(response);
       } catch (error) {
         // Do something with error
       } finally {
@@ -38,11 +39,15 @@ const DataLoader = (props : {itemID : number}) => {
     <tr>
       <td>Loading</td>
       <td>Loading</td>
+      <td>Loading</td>
     </tr>
   ) : (
     <tr>
-      <td>{data}</td>
-      <td>{data}</td>
+      <td>
+        <img src={data?.icon} alt={`icon of ${data?.name}`} />
+        {data?.name}
+      </td>
+      <td>{data?.current.price}</td>
     </tr>
   );
 };
@@ -56,8 +61,9 @@ function Item() {
     <table>
       <tbody>
         <tr>
-          <td>item</td>
-          <td>price</td>
+          <td>Item</td>
+          <td>Price</td>
+          <td>Change</td>
         </tr>
         <DataLoader itemID={id as any} />
       </tbody>
@@ -67,8 +73,6 @@ function Item() {
   return (
     <div>
       <h3>
-        ID:
-        {id}
         {data}
       </h3>
     </div>
