@@ -1,6 +1,8 @@
+/* eslint-disable no-unused-expressions */
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable react/no-children-prop */
 import React, { useState } from 'react';
+
 import {
   BrowserRouter as Router,
   Switch,
@@ -38,7 +40,7 @@ const SearchResultTable = () => {
 
   return (
     <div className="App">
-      <SearchForm onSearch={(text) => handleSearchText(text.text)} />
+      <SearchForm onSearch={(text) => handleSearchText(text)} />
       {ResultsDiv}
     </div>
   );

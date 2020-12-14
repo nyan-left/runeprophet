@@ -1,29 +1,27 @@
+/* eslint-disable jsx-a11y/label-has-associated-control */
+/* eslint-disable no-nested-ternary */
 import React, { useState } from 'react';
 //  import * as OSRS from 'osrs-trade-stats';
 
 // eslint-disable-next-line no-unused-vars
-const SearchForm = ({ onSearch } : {onSearch : (text: Readonly<{ text: string; }>) => void}) => {
-  const [query, setQuery] = useState({ text: '' });
-
-  function handleChange(event: { preventDefault: () => void; target: { value: any; }; }) {
-    event.preventDefault();
-    const newQuery = Object.freeze({ text: event.target.value });
-    setQuery(newQuery);
-  }
-
-  function search(event: { preventDefault: () => void; }) {
-    event.preventDefault();
-    const newQuery = Object.freeze({ text: query.text });
-    if (onSearch) onSearch(newQuery);
-  }
+const SearchForm = ({ onSearch } : {onSearch : (text: string) => void}) => {
+  const [search, setSearch] = useState('');
 
   return (
-    <form>
-      <input type="text" onChange={handleChange} />
-      <button onClick={search} type="button">
-        Search
-      </button>
-    </form>
+    <div className="App">
+      <h1>Search for an item</h1>
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          onSearch(search);
+        }}
+      >
+        <label>Search : </label>
+        <input type="text" onChange={(e) => setSearch(e.target.value)} />
+        <input type="submit" value="search" />
+      </form>
+    </div>
   );
 };
+
 export default SearchForm;

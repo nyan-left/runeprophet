@@ -13205,7 +13205,6 @@ const items = [
   },
   {
     id: 21183,
-    
     name: 'Bracelet of slaughter',
   },
 ];
