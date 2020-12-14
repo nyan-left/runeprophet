@@ -31,7 +31,7 @@ type Await<T> = T extends {
 
 const useStyles = makeStyles({
   table: {
-    minWidth: 650,
+    minWidth: 100,
   },
 });
 
@@ -74,17 +74,16 @@ function DataLoader(props : {itemsList : { id: number; name: string; }[]}) : any
   }
   return (
     data.map((item, i) => (
-      <tr key={i}>
-        <td>
-          <img src={item?.icon} alt={`icon of ${item?.name}`} />
+      <TableRow key={item?.name}>
+        <TableCell align="right"><img src={item?.icon} alt={`icon of ${item?.name}`} /></TableCell>
+        <TableCell>
           <Link to={`/item/${item?.id}`}>
             {item?.name}
           </Link>
-        </td>
-        <td>{item?.current.price}</td>
-      </tr>
+        </TableCell>
+        <TableCell align="left">{item?.current.price}</TableCell>
+      </TableRow>
     ))
-
   );
 }
 
@@ -94,15 +93,26 @@ const SearchResultList = () => {
     const searchResult = fuzzySearch(text);
     setFilteredItems(searchResult);
   };
+  const classes = useStyles();
 
   const ResultsDiv = (
     <div>
       <Router>
-        <table>
-          <tbody>
-            <DataLoader itemsList={filteredItems} />
-          </tbody>
-        </table>
+        <TableContainer component={Paper}>
+          <Table className={classes.table} aria-label="simple table">
+            <TableHead>
+              <TableRow>
+                <TableCell />
+                <TableCell>Name</TableCell>
+                <TableCell align="left">Price</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody style={{ width: '100%' }}>
+              <DataLoader itemsList={filteredItems} />
+            </TableBody>
+          </Table>
+        </TableContainer>
+
         <Switch>
           <Route path="/item/:id" children={<Item />} />
         </Switch>
@@ -113,7 +123,9 @@ const SearchResultList = () => {
   return (
     <div className="App">
       <SearchInputForm onSearch={(text) => handleSearchText(text)} />
-      {ResultsDiv}
+      <Paper elevation={3}>
+        {ResultsDiv}
+      </Paper>
     </div>
   );
 };
