@@ -44,7 +44,7 @@ function DataLoader(props :{ id: number }) {
 function Item() {
   const { id } = useParams<any>();
   return (
-    <div>
+    <div id="itemPage">
       <DataLoader id={id} />
     </div>
   );

@@ -76,7 +76,16 @@ function DataLoader(props : {itemsList : { id: number; name: string; }[]}) : any
       <TableRow key={item?.name}>
         <TableCell align="right"><img src={item?.icon} alt={`icon of ${item?.name}`} /></TableCell>
         <TableCell>
-          <Link to={`/item/${item?.id}`}>
+          <Link
+            onClick={() => {
+            // not reacty at all. TODO - Solve via props/conditional rendering
+              const resultsTable = document.getElementById('searchResultsTable') || document.createElement('div');
+              resultsTable.style.display = 'none';
+              const itemPage = document.getElementById('itemPage') || document.createElement('div');
+              itemPage.style.display = 'inline';
+            }}
+            to={`/item/${item?.id}`}
+          >
             {item?.name}
           </Link>
         </TableCell>
@@ -97,7 +106,7 @@ const SearchResultList = () => {
   const ResultsDiv = (
     <div>
       <Router>
-        <TableContainer component={Paper}>
+        <TableContainer id="searchResultsTable" component={Paper} style={{ display: 'inline' }}>
           <Table className={classes.table} aria-label="simple table">
             <TableHead>
               <TableRow>

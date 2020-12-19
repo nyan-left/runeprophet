@@ -14,6 +14,10 @@ const SearchInputForm = ({ onSearch } : {onSearch : (text: string) => void}) => 
       <h1>Search for an item</h1>
       <form
         onSubmit={(e) => {
+          const itemPage = document.getElementById('itemPage') || document.createElement('div');
+          itemPage.style.display = 'none';
+          const resultsTable = document.getElementById('searchResultsTable') || document.createElement('div');
+          resultsTable.style.display = 'inline';
           e.preventDefault();
           onSearch(search);
         }}
