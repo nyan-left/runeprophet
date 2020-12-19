@@ -51,18 +51,32 @@ const MyStockChart = (props : { data? : TradeStatsDetails }) => {
             tooltip: {
               valueSuffix: ' gp',
             },
+            zIndex: 10,
             data: data?.map((d) => [d.date.getTime(), d.priceDaily]),
           },
           {
             name: 'average price',
+            type: 'line',
             tooltip: {
               valueSuffix: ' gp',
             },
             data: data?.map((d) => [d.date.getTime(), d.priceAverage]),
           },
           {
-            type: 'column',
+            color: {
+              linearGradient: {
+                x1: 0,
+                x2: 0,
+                y1: 0,
+                y2: 1,
+              },
+              stops: [
+                [0, '#ffe1c6'],
+                [1, '#ffffff'],
+              ],
+            },
             name: 'trade volume',
+            type: 'areaspline',
             yAxis: 1,
             data: data?.map((d) => [d.date.getTime(), d.tradeVolume]),
           },
