@@ -7,7 +7,7 @@ import {
   useParams,
 } from 'react-router-dom';
 import * as OSRS from 'osrs-trade-stats';
-import MyStockChart from './StockChart';
+import MyStockChart from './chart/StockChart';
 
 type Await<T> = T extends {
     then(onfulfilled?: (value: infer U) => unknown): unknown;

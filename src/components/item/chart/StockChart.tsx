@@ -10,7 +10,7 @@ type Await<T> = T extends {
 } ? U : T;
 
 export type TradeStatsDetails = Await<ReturnType<typeof OSRS.getTradeVolume>>;
-
+Highcharts.setOptions({ lang: { thousandsSep: ',' } });
 const MyStockChart = (props : { data? : TradeStatsDetails }) => {
   const { data } = props;
   return (
@@ -18,35 +18,46 @@ const MyStockChart = (props : { data? : TradeStatsDetails }) => {
       highcharts={Highcharts}
       constructorType="stockChart"
       options={{
+        legend: {
+          align: 'right',
+          verticalAlign: 'left',
+          layout: 'vertical',
+        },
+        credits: {
+          enabled: false,
+        },
         title: {
           text: 'Price and Trade Volume',
         },
         xAxis: [{
           type: 'datetime',
+          tickInterval: 1000 * 3600 * 24 * 30,
         }],
-        yAxis: [{ // Primary yAxis
-          labels: {
-            style: {
+        yAxis: [
+          {
+            labels: {
+              style: {
+              },
             },
-          },
-          title: {
-            text: 'Price',
-            style: {
+            title: {
+              text: 'Price',
+              style: {
+              },
             },
-          },
+          }, {
+            title: {
+              text: 'Trade volume',
+            },
 
-        }, {
-          title: {
-            text: 'Trade volume',
+            opposite: true,
           },
-
-          opposite: true,
-        }],
+        ],
         tooltip: {
           shared: true,
         },
         series: [
           {
+            color: 'green',
             name: 'daily price',
             tooltip: {
               valueSuffix: ' gp',
@@ -55,28 +66,19 @@ const MyStockChart = (props : { data? : TradeStatsDetails }) => {
             data: data?.map((d) => [d.date.getTime(), d.priceDaily]),
           },
           {
+            color: 'red',
             name: 'average price',
             type: 'line',
             tooltip: {
               valueSuffix: ' gp',
             },
+            zIndex: 9,
             data: data?.map((d) => [d.date.getTime(), d.priceAverage]),
           },
           {
-            color: {
-              linearGradient: {
-                x1: 0,
-                x2: 0,
-                y1: 0,
-                y2: 1,
-              },
-              stops: [
-                [0, '#ffe1c6'],
-                [1, '#ffffff'],
-              ],
-            },
+            color: 'lightgray',
             name: 'trade volume',
-            type: 'areaspline',
+            type: 'line',
             yAxis: 1,
             data: data?.map((d) => [d.date.getTime(), d.tradeVolume]),
           },
