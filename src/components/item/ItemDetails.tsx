@@ -6,6 +6,8 @@ import {
   useParams,
 } from 'react-router-dom';
 import * as OSRS from 'osrs-trade-stats';
+import Highcharts from 'highcharts';
+import HighchartsReact from 'highcharts-react-official';
 
 type Await<T> = T extends {
     then(onfulfilled?: (value: infer U) => unknown): unknown;
@@ -37,6 +39,24 @@ function DataLoader(props :{ id: number }) {
   return isLoading ? <div>Loading</div> : (
     <div>
       {data?.map((item) => <small key={item.dateString}>{`${item.dateString} trade-volume: ${item.tradeVolume}, `}</small>)}
+      <HighchartsReact
+        highcharts={Highcharts}
+        options={{
+          title: {
+            text: 'My chart',
+          },
+          series: [{
+            data: data?.map((d) => [d.dateString, d.priceDaily]),
+          },
+          {
+            data: data?.map((d) => [d.dateString, d.tradeVolume]),
+          },
+          {
+            data: data?.map((d) => [d.dateString, d.priceAverage]),
+          },
+          ],
+        }}
+      />
     </div>
   );
 }
