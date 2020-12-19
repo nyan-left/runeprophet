@@ -1,19 +1,19 @@
 /* eslint-disable react/destructuring-assignment */
 /* eslint-disable no-unused-expressions */
 /* eslint-disable no-unused-vars */
+import * as moment from 'moment';
 import React, { useEffect, useState } from 'react';
 import {
   useParams,
 } from 'react-router-dom';
 import * as OSRS from 'osrs-trade-stats';
-import Highcharts from 'highcharts';
-import HighchartsReact from 'highcharts-react-official';
+import MyStockChart from './StockChart';
 
 type Await<T> = T extends {
     then(onfulfilled?: (value: infer U) => unknown): unknown;
 } ? U : T;
 
-type TradeStatsDetails = Await<ReturnType<typeof OSRS.getTradeVolume>>;
+export type TradeStatsDetails = Await<ReturnType<typeof OSRS.getTradeVolume>>;
 
 function DataLoader(props :{ id: number }) {
   const [isLoading, setIsLoading] = useState(true);
@@ -38,24 +38,7 @@ function DataLoader(props :{ id: number }) {
 
   return isLoading ? <div>Loading</div> : (
     <div>
-      <HighchartsReact
-        highcharts={Highcharts}
-        options={{
-          title: {
-            text: 'My chart',
-          },
-          series: [{
-            data: data?.map((d) => [d.dateString, d.priceDaily]),
-          },
-          {
-            data: data?.map((d) => [d.dateString, d.tradeVolume]),
-          },
-          {
-            data: data?.map((d) => [d.dateString, d.priceAverage]),
-          },
-          ],
-        }}
-      />
+      <MyStockChart data={data} />
     </div>
   );
 }
