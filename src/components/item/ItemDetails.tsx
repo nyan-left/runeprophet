@@ -38,7 +38,6 @@ function DataLoader(props :{ id: number }) {
 
   return isLoading ? <div>Loading</div> : (
     <div>
-      {data?.map((item) => <small key={item.dateString}>{`${item.dateString} trade-volume: ${item.tradeVolume}, `}</small>)}
       <HighchartsReact
         highcharts={Highcharts}
         options={{
