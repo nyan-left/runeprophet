@@ -2,6 +2,7 @@
   "name": "prophet",
   "version": "0.0.0",
   "private": true,
+  "homepage": "https://nyan-left.github.io/runeprophet",
   "dependencies": {
     "@material-ui/core": "^4.11.2",
     "@material-ui/icons": "^4.11.2",
