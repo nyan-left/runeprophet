@@ -13,7 +13,7 @@ type Await<T> = T extends {
     then(onfulfilled?: (value: infer U) => unknown): unknown;
 } ? U : T;
 
-export type TradeStatsDetails = Await<ReturnType<typeof OSRS.getTradeVolume>>;
+export type TradeStatsDetails = Await<ReturnType<typeof OSRS.getFromWiki>>;
 
 function DataLoader(props :{ id: number }) {
   const [isLoading, setIsLoading] = useState(true);
@@ -24,7 +24,7 @@ function DataLoader(props :{ id: number }) {
     async function fetchData() {
       !didCancel && setIsLoading(true) && id;
       try {
-        const response = await OSRS.getTradeVolume(id);
+        const response = await OSRS.getFromWiki(id);
         !didCancel && setData(response);
       } catch (error) {
         // Do something with error

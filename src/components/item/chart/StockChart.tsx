@@ -4,14 +4,22 @@ import React from 'react';
 import Highcharts from 'highcharts/highstock';
 import HighchartsReact from 'highcharts-react-official';
 import * as OSRS from 'osrs-trade-stats';
+import getAverage from './SMA';
 
 type Await<T> = T extends {
     then(onfulfilled?: (value: infer U) => unknown): unknown;
 } ? U : T;
 
-export type TradeStatsDetails = Await<ReturnType<typeof OSRS.getTradeVolume>>;
+export type TradeStatsDetails = Await<ReturnType<typeof OSRS.getFromWiki>>;
 Highcharts.setOptions({ lang: { thousandsSep: ',' } });
 const Chart = (props : { data? : TradeStatsDetails }) => {
+  const groupingUnits = [
+    [
+      'week', // unit name
+      [1], // allowed multiples
+    ],
+    ['month', [1, 2, 3, 4, 6]],
+  ];
   const { data } = props;
   return (
     <HighchartsReact
@@ -42,14 +50,6 @@ const Chart = (props : { data? : TradeStatsDetails }) => {
               },
             },
             opposite: false,
-          }, {
-            title: {
-              text: 'Trade volume',
-              style: {
-                color: 'grey',
-              },
-            },
-            opposite: true,
           },
           {
             title: {
@@ -59,10 +59,19 @@ const Chart = (props : { data? : TradeStatsDetails }) => {
               },
             },
             opposite: false,
+          }, {
+            title: {
+              text: 'Volume',
+              style: {
+                color: 'grey',
+              },
+            },
+
+            opposite: true,
           },
         ],
         tooltip: {
-          shared: true,
+          split: true,
         },
         series: [
           {
@@ -82,14 +91,17 @@ const Chart = (props : { data? : TradeStatsDetails }) => {
               valueSuffix: ' gp',
             },
             zIndex: 9,
-            data: data?.map((d) => [d.date.getTime(), d.priceAverage]),
+            data: data?.map((d, i) => [d.date.getTime(), getAverage(data, i)]),
           },
           {
             color: 'lightgray',
-            name: 'trade volume',
+            name: 'Volume',
             type: 'line',
             yAxis: 1,
             data: data?.map((d) => [d.date.getTime(), d.tradeVolume]),
+            dataGrouping: {
+              units: groupingUnits,
+            },
           },
         ],
       }}

@@ -8231,14 +8231,13 @@
   "resolved" "https://registry.npmjs.org/os-browserify/-/os-browserify-0.3.0.tgz"
   "version" "0.3.0"
 
-"osrs-trade-stats@^0.1.1":
-  "integrity" "sha512-2PXrhANsNYJtWFrfVS5o0dzdNiFQCjUI8FvK+RtEgy9XgheAIH41tAcmJVEveUJV+E/5Jegkkme6kkDA2fjJaA=="
-  "resolved" "https://registry.npmjs.org/osrs-trade-stats/-/osrs-trade-stats-0.1.1.tgz"
-  "version" "0.1.1"
+"osrs-trade-stats@^0.2.1":
+  "integrity" "sha512-bNZaCi3X+FRI6NsfM9ReFsGFuPugk1G0YFXC6eKsy3h9iOhoLQfGPsYJ2uSwhHBDv3z5X9BOsMyi93QyKvdtOQ=="
+  "resolved" "https://registry.npmjs.org/osrs-trade-stats/-/osrs-trade-stats-0.2.1.tgz"
+  "version" "0.2.1"
   dependencies:
     "axios" "^0.21.0"
     "lodash" "^4.17.20"
-    "moment" "^2.29.1"
     "user-agents" "^1.0.559"
 
 "p-each-series@^2.1.0":
