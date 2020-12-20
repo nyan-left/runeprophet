@@ -7,7 +7,7 @@ import {
   useParams,
 } from 'react-router-dom';
 import * as OSRS from 'osrs-trade-stats';
-import MyStockChart from './chart/StockChart';
+import Chart from './chart/StockChart';
 
 type Await<T> = T extends {
     then(onfulfilled?: (value: infer U) => unknown): unknown;
@@ -38,7 +38,7 @@ function DataLoader(props :{ id: number }) {
 
   return isLoading ? <div>Loading</div> : (
     <div>
-      <MyStockChart data={data} />
+      <Chart data={data} />
     </div>
   );
 }

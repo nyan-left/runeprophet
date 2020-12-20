@@ -22,7 +22,7 @@ import {
 } from 'react-router-dom';
 import * as OSRS from 'osrs-trade-stats';
 import fuzzySearch from '../../store/search';
-import Item from '../item/ItemDetails';
+import Item from '../item/item';
 import SearchInputForm from './SearchInputForm';
 
 type Await<T> = T extends {
@@ -65,9 +65,7 @@ function DataLoader(props : {itemsList : { id: number; name: string; }[]}) : any
   if (isLoading) {
     return (
       <tr>
-        <td>Loading</td>
-        <td>Loading</td>
-        <td>Loading</td>
+        <td style={{ textAlign: 'center' }}>Loading...</td>
       </tr>
     );
   }

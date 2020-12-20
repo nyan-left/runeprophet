@@ -11,7 +11,7 @@ type Await<T> = T extends {
 
 export type TradeStatsDetails = Await<ReturnType<typeof OSRS.getTradeVolume>>;
 Highcharts.setOptions({ lang: { thousandsSep: ',' } });
-const MyStockChart = (props : { data? : TradeStatsDetails }) => {
+const Chart = (props : { data? : TradeStatsDetails }) => {
   const { data } = props;
   return (
     <HighchartsReact
@@ -35,21 +35,30 @@ const MyStockChart = (props : { data? : TradeStatsDetails }) => {
         }],
         yAxis: [
           {
-            labels: {
-              style: {
-              },
-            },
             title: {
-              text: 'Price',
+              text: 'Average Price',
               style: {
+                color: 'red',
               },
             },
+            opposite: false,
           }, {
             title: {
               text: 'Trade volume',
+              style: {
+                color: 'grey',
+              },
             },
-
             opposite: true,
+          },
+          {
+            title: {
+              text: 'Daily Price',
+              style: {
+                color: 'green',
+              },
+            },
+            opposite: false,
           },
         ],
         tooltip: {
@@ -88,4 +97,4 @@ const MyStockChart = (props : { data? : TradeStatsDetails }) => {
   );
 };
 
-export default MyStockChart;
+export default Chart;
