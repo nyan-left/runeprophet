@@ -4,6 +4,7 @@ import React from 'react';
 import Highcharts from 'highcharts/highstock';
 import HighchartsReact from 'highcharts-react-official';
 import * as OSRS from 'osrs-trade-stats';
+import getSMA from './SMA';
 
 type Await<T> = T extends {
     then(onfulfilled?: (value: infer U) => unknown): unknown;
@@ -13,13 +14,7 @@ export type TradeStatsDetails = Await<ReturnType<typeof OSRS.getFromWiki>>;
 Highcharts.setOptions({ lang: { thousandsSep: ',' } });
 const Chart = (props : { data? : TradeStatsDetails }) => {
   const { data } = props;
-  const groupingUnits = [
-    [
-      'week', // unit name
-      [1], // allowed multiples
-    ],
-    ['month', [1, 2, 3, 4, 6]],
-  ];
+
   const options = {
     rangeSelector: {
       selected: 1,
@@ -76,7 +71,7 @@ const Chart = (props : { data? : TradeStatsDetails }) => {
         color: 'red',
         type: 'line',
         name: 'Average',
-        data: data?.map((d) => [d.date, d.priceDaily * 0.5]), // todo
+        data: getSMA(data as TradeStatsDetails, 30),
         tooltip: { valueSuffix: ' gp' },
         yAxis: 0,
       },
