@@ -16,6 +16,7 @@ const Chart = (props : { data? : TradeStatsDetails }) => {
   const { data } = props;
 
   const options = {
+    credits: { enabled: false },
     rangeSelector: {
       selected: 1,
     },
@@ -68,7 +69,7 @@ const Chart = (props : { data? : TradeStatsDetails }) => {
         yAxis: 0,
       },
       {
-        color: 'red',
+        color: 'lightblue',
         type: 'line',
         name: 'Average',
         data: getSMA(data as TradeStatsDetails, 30),
@@ -76,7 +77,7 @@ const Chart = (props : { data? : TradeStatsDetails }) => {
         yAxis: 0,
       },
       {
-        color: 'lightgray',
+        color: 'orange',
         type: 'areaspline',
         name: 'Trade Volume',
         data: data?.map((d) => [d.date, d.tradeVolume]),
