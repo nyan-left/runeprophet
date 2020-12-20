@@ -4,7 +4,6 @@ import React from 'react';
 import Highcharts from 'highcharts/highstock';
 import HighchartsReact from 'highcharts-react-official';
 import * as OSRS from 'osrs-trade-stats';
-import getAverage from './SMA';
 
 type Await<T> = T extends {
     then(onfulfilled?: (value: infer U) => unknown): unknown;
@@ -13,6 +12,7 @@ type Await<T> = T extends {
 export type TradeStatsDetails = Await<ReturnType<typeof OSRS.getFromWiki>>;
 Highcharts.setOptions({ lang: { thousandsSep: ',' } });
 const Chart = (props : { data? : TradeStatsDetails }) => {
+  const { data } = props;
   const groupingUnits = [
     [
       'week', // unit name
@@ -20,91 +20,80 @@ const Chart = (props : { data? : TradeStatsDetails }) => {
     ],
     ['month', [1, 2, 3, 4, 6]],
   ];
-  const { data } = props;
+  const options = {
+    rangeSelector: {
+      selected: 1,
+    },
+
+    title: {
+      text: '[icon] Item-Name Historical',
+    },
+
+    yAxis: [
+      {
+        labels: {
+          align: 'right',
+          x: -3,
+        },
+        title: {
+          text: 'price (gp)',
+        },
+        height: '60%',
+        lineWidth: 2,
+        resize: {
+          enabled: true,
+        },
+      },
+      {
+        labels: {
+          align: 'right',
+          x: -3,
+        },
+        title: {
+          text: 'Trade Volume',
+        },
+        top: '65%',
+        height: '35%',
+        offset: 0,
+        lineWidth: 2,
+      },
+    ],
+
+    tooltip: {
+      split: true,
+    },
+
+    series: [
+      {
+        color: 'green',
+        type: 'line',
+        name: 'Daily Price',
+        data: data?.map((d) => [d.date, d.priceDaily]),
+        tooltip: { valueSuffix: ' gp' },
+        yAxis: 0,
+      },
+      {
+        color: 'red',
+        type: 'line',
+        name: 'Average',
+        data: data?.map((d) => [d.date, d.priceDaily * 0.5]), // todo
+        tooltip: { valueSuffix: ' gp' },
+        yAxis: 0,
+      },
+      {
+        color: 'lightgray',
+        type: 'areaspline',
+        name: 'Trade Volume',
+        data: data?.map((d) => [d.date, d.tradeVolume]),
+        yAxis: 1,
+      },
+    ],
+  };
   return (
     <HighchartsReact
       highcharts={Highcharts}
       constructorType="stockChart"
-      options={{
-        legend: {
-          align: 'right',
-          verticalAlign: 'left',
-          layout: 'vertical',
-        },
-        credits: {
-          enabled: false,
-        },
-        title: {
-          text: 'Price and Trade Volume',
-        },
-        xAxis: [{
-          type: 'datetime',
-          tickInterval: 1000 * 3600 * 24 * 30,
-        }],
-        yAxis: [
-          {
-            title: {
-              text: 'Average Price',
-              style: {
-                color: 'red',
-              },
-            },
-            opposite: false,
-          },
-          {
-            title: {
-              text: 'Daily Price',
-              style: {
-                color: 'green',
-              },
-            },
-            opposite: false,
-          }, {
-            title: {
-              text: 'Volume',
-              style: {
-                color: 'grey',
-              },
-            },
-
-            opposite: true,
-          },
-        ],
-        tooltip: {
-          split: true,
-        },
-        series: [
-          {
-            color: 'green',
-            name: 'daily price',
-            tooltip: {
-              valueSuffix: ' gp',
-            },
-            zIndex: 10,
-            data: data?.map((d) => [d.date.getTime(), d.priceDaily]),
-          },
-          {
-            color: 'red',
-            name: 'average price',
-            type: 'line',
-            tooltip: {
-              valueSuffix: ' gp',
-            },
-            zIndex: 9,
-            data: data?.map((d, i) => [d.date.getTime(), getAverage(data, i)]),
-          },
-          {
-            color: 'lightgray',
-            name: 'Volume',
-            type: 'line',
-            yAxis: 1,
-            data: data?.map((d) => [d.date.getTime(), d.tradeVolume]),
-            dataGrouping: {
-              units: groupingUnits,
-            },
-          },
-        ],
-      }}
+      options={options}
     />
   );
 };
