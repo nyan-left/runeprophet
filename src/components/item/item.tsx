@@ -8,6 +8,7 @@ import {
 } from 'react-router-dom';
 import * as OSRS from 'osrs-trade-stats';
 import Chart from './chart/StockChart';
+import useStore from '../../store/store';
 
 type Await<T> = T extends {
     then(onfulfilled?: (value: infer U) => unknown): unknown;
@@ -45,6 +46,9 @@ function DataLoader(props :{ id: number }) {
 
 function Item() {
   const { id } = useParams<any>();
+
+  const store = useStore.showGraph((state) => state);
+  if (!store.showGraph) return null;
   return (
     <div id="itemPage">
       <DataLoader id={id} />

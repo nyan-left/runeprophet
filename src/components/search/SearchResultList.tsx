@@ -24,7 +24,11 @@ import * as OSRS from 'osrs-trade-stats';
 import fuzzySearch from '../../store/search';
 import Item from '../item/item';
 import SearchInputForm from './SearchInputForm';
-
+import useStore from '../../store/store';
+// const store = {
+//   graph: useStore.showGraph((state) => state),
+//   searchResult: useStore.showSearch((state) => state),
+// };
 type Await<T> = T extends {
     then(onfulfilled?: (value: infer U) => unknown): unknown;
 } ? U : T;
@@ -40,7 +44,10 @@ function DataLoader(props : {itemsList : { id: number; name: string; }[]}) : any
   const [isLoading, setIsLoading] = useState(false);
   const [data, setData] = useState<ItemDetails[]>([]);
   const { itemsList } = props;
-
+  const store = {
+    graph: useStore.showGraph((state) => state),
+    searchResult: useStore.showSearch((state) => state),
+  };
   useEffect(() => {
     let didCancel = false;
     async function fetchData() {
@@ -77,10 +84,12 @@ function DataLoader(props : {itemsList : { id: number; name: string; }[]}) : any
           <Link
             onClick={() => {
             // not reacty at all. TODO - Solve via props/conditional rendering
-              const resultsTable = document.getElementById('searchResultsTable') || document.createElement('div');
-              resultsTable.style.display = 'none';
-              const itemPage = document.getElementById('itemPage') || document.createElement('div');
-              itemPage.style.display = 'inline';
+              // const resultsTable = document.getElementById('searchResultsTable') || document.createElement('div');
+              // resultsTable.style.display = 'none';
+              store.searchResult.set(false);
+              store.graph.set(true);
+              // const itemPage = document.getElementById('itemPage') || document.createElement('div');
+              // itemPage.style.display = 'inline';
             }}
             to={`/item/${item?.id}`}
           >
@@ -100,24 +109,32 @@ const SearchResultList = () => {
     setFilteredItems(searchResult);
   };
   const classes = useStyles();
+
+  const store = {
+    graph: useStore.showGraph((state) => state),
+    searchResult: useStore.showSearch((state) => state),
+  };
+
+  const searchResults = (
+    <TableContainer id="searchResultsTable" component={Paper} style={{ display: 'inline' }}>
+      <Table className={classes.table} aria-label="simple table">
+        <TableHead>
+          <TableRow>
+            <TableCell />
+            <TableCell>Name</TableCell>
+            <TableCell>Trade Limit</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody style={{ width: '100%' }}>
+          <DataLoader itemsList={filteredItems} />
+        </TableBody>
+      </Table>
+    </TableContainer>
+  );
   const ResultsDiv = (
     <div>
       <Router>
-        <TableContainer id="searchResultsTable" component={Paper} style={{ display: 'inline' }}>
-          <Table className={classes.table} aria-label="simple table">
-            <TableHead>
-              <TableRow>
-                <TableCell />
-                <TableCell>Name</TableCell>
-                <TableCell>Trade Limit</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody style={{ width: '100%' }}>
-              <DataLoader itemsList={filteredItems} />
-            </TableBody>
-          </Table>
-        </TableContainer>
-
+        {store.searchResult.showSearch ? searchResults : null}
         <Switch>
           <Route path="/item/:id" children={<Item />} />
         </Switch>

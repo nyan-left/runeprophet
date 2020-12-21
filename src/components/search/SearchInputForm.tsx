@@ -1,3 +1,5 @@
+/* eslint-disable max-len */
+/* eslint-disable padded-blocks */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable no-nested-ternary */
 import React, { useState } from 'react';
@@ -6,11 +8,14 @@ import Button from '@material-ui/core/Button';
 import { Input } from '@material-ui/core';
 import Typography from '@material-ui/core/Typography/Typography';
 import Paper from '@material-ui/core/Paper/Paper';
-
+import useStore from '../../store/store';
 // eslint-disable-next-line no-unused-vars
 const SearchInputForm = ({ onSearch } : {onSearch : (text: string) => void}) => {
   const [search, setSearch] = useState('');
-
+  const store = {
+    graph: useStore.showGraph((state) => state),
+    searchResult: useStore.showSearch((state) => state),
+  };
   return (
     <Paper
       elevation={1}
@@ -27,10 +32,15 @@ const SearchInputForm = ({ onSearch } : {onSearch : (text: string) => void}) => 
         </Typography>
         <form
           onSubmit={(e) => {
-            const itemPage = document.getElementById('itemPage') || document.createElement('div');
-            itemPage.style.display = 'none';
-            const resultsTable = document.getElementById('searchResultsTable') || document.createElement('div');
-            resultsTable.style.display = 'inline';
+
+            // const itemPage = document.getElementById('itemPage') || document.createElement('div');
+            // itemPage.style.display = 'none';
+            store.graph.set(false);
+            store.searchResult.set(true);
+
+            // const resultsTable = document.getElementById('searchResultsTable') || document.createElement('div');
+            // resultsTable.style.display = 'inline';
+
             e.preventDefault();
             onSearch(search);
           }}
