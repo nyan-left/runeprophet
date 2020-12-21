@@ -1,17 +1,20 @@
 {
   "files": {
     "main.css": "/runeprophet/static/css/main.0c6cf270.chunk.css",
-    "main.js": "/runeprophet/static/js/main.84fb56a5.chunk.js",
-    "runtime-main.js": "/runeprophet/static/js/runtime-main.18f97981.js",
-    "static/js/2.9a9ce321.chunk.js": "/runeprophet/static/js/2.9a9ce321.chunk.js",
-    "static/js/3.32eddeff.chunk.js": "/runeprophet/static/js/3.32eddeff.chunk.js",
+    "main.js": "/runeprophet/static/js/main.3a727dc3.chunk.js",
+    "runtime-main.js": "/runeprophet/static/js/runtime-main.ab2db4a3.js",
+    "static/css/2.274e3a61.chunk.css": "/runeprophet/static/css/2.274e3a61.chunk.css",
+    "static/js/2.dfeaefe3.chunk.js": "/runeprophet/static/js/2.dfeaefe3.chunk.js",
+    "static/js/3.956cfe8e.chunk.js": "/runeprophet/static/js/3.956cfe8e.chunk.js",
     "index.html": "/runeprophet/index.html",
-    "static/js/2.9a9ce321.chunk.js.LICENSE.txt": "/runeprophet/static/js/2.9a9ce321.chunk.js.LICENSE.txt"
+    "static/js/2.dfeaefe3.chunk.js.LICENSE.txt": "/runeprophet/static/js/2.dfeaefe3.chunk.js.LICENSE.txt",
+    "static/media/index.css": "/runeprophet/static/media/roboto-vietnamese-400-normal.52cebac0.woff2"
   },
   "entrypoints": [
-    "static/js/runtime-main.18f97981.js",
-    "static/js/2.9a9ce321.chunk.js",
+    "static/js/runtime-main.ab2db4a3.js",
+    "static/css/2.274e3a61.chunk.css",
+    "static/js/2.dfeaefe3.chunk.js",
     "static/css/main.0c6cf270.chunk.css",
-    "static/js/main.84fb56a5.chunk.js"
+    "static/js/main.3a727dc3.chunk.js"
   ]
 }
