@@ -29,7 +29,7 @@ type Await<T> = T extends {
     then(onfulfilled?: (value: infer U) => unknown): unknown;
 } ? U : T;
 
-type ItemDetails = Await<ReturnType<typeof OSRS.getFromOfficialAPI>>;
+type ItemDetails = Await<ReturnType<typeof OSRS.getFromOsrsBox>>;
 
 const useStyles = makeStyles({
   table: {
@@ -48,7 +48,7 @@ function DataLoader(props : {itemsList : { id: number; name: string; }[]}) : any
       try {
         // eslint-disable-next-line no-return-await
         itemsList.map((itemID) => console.log(itemID));
-        const response = await Promise.all(itemsList.map((item) => OSRS.getFromOfficialAPI(item.id)));
+        const response = await Promise.all(itemsList.map((item) => OSRS.getFromOsrsBox(item.id, '')));
 
         //   await itemIDs.map(OSRS.getFromOfficialAPI);
         !didCancel && setData(response);
@@ -72,7 +72,7 @@ function DataLoader(props : {itemsList : { id: number; name: string; }[]}) : any
   return (
     data.map((item, i) => (
       <TableRow key={item?.name}>
-        <TableCell align="right"><img src={item?.icon} alt={`icon of ${item?.name}`} /></TableCell>
+        <TableCell align="right"><img src={`data:image/jpeg;base64,${item?.icon}`} alt={`icon of ${item?.name}`} /></TableCell>
         <TableCell>
           <Link
             onClick={() => {
@@ -87,7 +87,7 @@ function DataLoader(props : {itemsList : { id: number; name: string; }[]}) : any
             {item?.name}
           </Link>
         </TableCell>
-        <TableCell align="left">{item?.current.price}</TableCell>
+        <TableCell align="left">{item?.cost}</TableCell>
       </TableRow>
     ))
   );

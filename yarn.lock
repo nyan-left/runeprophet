@@ -8231,10 +8231,10 @@
   "resolved" "https://registry.npmjs.org/os-browserify/-/os-browserify-0.3.0.tgz"
   "version" "0.3.0"
 
-"osrs-trade-stats@^0.2.1":
-  "integrity" "sha512-bNZaCi3X+FRI6NsfM9ReFsGFuPugk1G0YFXC6eKsy3h9iOhoLQfGPsYJ2uSwhHBDv3z5X9BOsMyi93QyKvdtOQ=="
-  "resolved" "https://registry.npmjs.org/osrs-trade-stats/-/osrs-trade-stats-0.2.1.tgz"
-  "version" "0.2.1"
+"osrs-trade-stats@^0.2.3":
+  "integrity" "sha512-41m9zY9HOeIE/xggR2dPp3PGWaP5gPkPI1KspD9mJXMt2jbKm3/9dwT9Qt1FpJfuuLdMrywYbN/c71+UA/xlgQ=="
+  "resolved" "https://registry.npmjs.org/osrs-trade-stats/-/osrs-trade-stats-0.2.3.tgz"
+  "version" "0.2.3"
   dependencies:
     "axios" "^0.21.0"
     "lodash" "^4.17.20"
