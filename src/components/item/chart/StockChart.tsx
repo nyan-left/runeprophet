@@ -11,7 +11,7 @@ type Await<T> = T extends {
     then(onfulfilled?: (value: infer U) => unknown): unknown;
 } ? U : T;
 export type OsrsboxItem = Await<ReturnType<typeof OSRS.getFromOsrsBox>>;
-
+const blankPixel = 'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg==';
 export type TradeStatsDetails = Await<ReturnType<typeof OSRS.getFromWiki>>;
 Highcharts.setOptions({ lang: { thousandsSep: ',' } });
 const Chart = (props : { data? : TradeStatsDetails, id : number }) => {
@@ -41,7 +41,7 @@ const Chart = (props : { data? : TradeStatsDetails, id : number }) => {
 
     title: {
       useHTML: true,
-      text: `<img src="data:image/jpeg;base64,${osrsboxItem?.icon}"/> ${osrsboxItem?.name}`,
+      text: `<img src="data:image/jpeg;base64,${osrsboxItem?.icon || blankPixel}"/> ${osrsboxItem?.name || ''}`,
     },
 
     yAxis: [
