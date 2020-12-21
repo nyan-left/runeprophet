@@ -3,12 +3,35 @@
 /* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from 'react';
 import './App.css';
-import * as OSRS from 'osrs-trade-stats';
+import { ThemeProvider } from '@material-ui/styles';
+import { createMuiTheme } from '@material-ui/core/styles';
+import CssBaseline from '@material-ui/core/CssBaseline/CssBaseline';
+import Paper from '@material-ui/core/Paper/Paper';
 import SearchResultList from './components/search/SearchResultList';
+import 'fontsource-roboto';
+
+const theme = createMuiTheme({
+  palette: {
+    type: 'dark',
+  },
+});
 
 const App = () => (
   <div className="App">
-    <SearchResultList />
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <div
+        // elevation={5}
+        style={{
+          marginBottom: '20px',
+          marginTop: '5%',
+          padding: '25px',
+        }}
+      >
+        <SearchResultList />
+      </div>
+
+    </ThemeProvider>
   </div>
 );
 

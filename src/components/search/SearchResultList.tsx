@@ -128,7 +128,7 @@ const SearchResultList = () => {
   return (
     <div className="App">
       <SearchInputForm onSearch={(text) => handleSearchText(text)} />
-      <Paper elevation={3}>
+      <Paper elevation={15} style={{ marginLeft: '5%', marginRight: '5%' }}>
         {ResultsDiv}
       </Paper>
     </div>
