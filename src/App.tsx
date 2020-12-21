@@ -22,8 +22,7 @@ const App = () => (
       <div
         style={{
           marginBottom: '20px',
-          marginTop: '5%',
-          padding: '25px',
+          padding: '10px',
         }}
       >
         <SearchResultList />

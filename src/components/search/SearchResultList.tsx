@@ -40,6 +40,7 @@ const useStyles = makeStyles({
     minWidth: 100,
   },
 });
+
 function DataLoader(props : {itemsList : { id: number; name: string; }[]}) : any {
   const [isLoading, setIsLoading] = useState(false);
   const [data, setData] = useState<ItemDetails[]>([]);
@@ -82,6 +83,7 @@ function DataLoader(props : {itemsList : { id: number; name: string; }[]}) : any
         <TableCell align="right"><img src={`data:image/jpeg;base64,${item?.icon}`} alt={`icon of ${item?.name}`} /></TableCell>
         <TableCell>
           <Link
+            style={{ color: '#FFF' }}
             onClick={() => {
             // not reacty at all. TODO - Solve via props/conditional rendering
               // const resultsTable = document.getElementById('searchResultsTable') || document.createElement('div');

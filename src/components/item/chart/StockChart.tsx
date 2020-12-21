@@ -230,7 +230,7 @@ const Chart = (props : { data? : TradeStatsDetails, id : number }) => {
 
     title: {
       useHTML: true,
-      text: `<img src="data:image/jpeg;base64,${osrsboxItem?.icon || blankPixel}"/> ${osrsboxItem?.name || ''}`,
+      text: `<img src="data:image/jpeg;base64,${osrsboxItem?.icon || blankPixel}" style="vertical-align: bottom;"/> ${osrsboxItem?.name || ''}`,
     },
 
     yAxis: [
