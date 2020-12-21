@@ -38,7 +38,7 @@ function DataLoader(props :{ id: number }) {
 
   return isLoading ? <div>Loading</div> : (
     <div>
-      <Chart data={data} />
+      <Chart data={data} id={id} />
     </div>
   );
 }

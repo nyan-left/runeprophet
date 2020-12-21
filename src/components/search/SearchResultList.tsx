@@ -100,7 +100,6 @@ const SearchResultList = () => {
     setFilteredItems(searchResult);
   };
   const classes = useStyles();
-
   const ResultsDiv = (
     <div>
       <Router>
