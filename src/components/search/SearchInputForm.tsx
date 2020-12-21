@@ -36,7 +36,7 @@ const SearchInputForm = ({ onSearch } : {onSearch : (text: string) => void}) => 
           }}
         >
           <Input style={{ marginBottom: '20px', marginRight: '15px' }} placeholder="Abyssal whip" onChange={(e) => setSearch(e.target.value)} inputProps={{ 'aria-label': 'description' }} />
-          <Button variant="contained" color="secondary" type="submit" value="search">search</Button>
+          <Button variant="contained" style={{ backgroundColor: 'orange' }} type="submit" value="search">search</Button>
         </form>
       </div>
     </Paper>

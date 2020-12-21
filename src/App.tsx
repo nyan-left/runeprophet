@@ -6,7 +6,6 @@ import './App.css';
 import { ThemeProvider } from '@material-ui/styles';
 import { createMuiTheme } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline/CssBaseline';
-import Paper from '@material-ui/core/Paper/Paper';
 import SearchResultList from './components/search/SearchResultList';
 import 'fontsource-roboto';
 
@@ -21,7 +20,6 @@ const App = () => (
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <div
-        // elevation={5}
         style={{
           marginBottom: '20px',
           marginTop: '5%',
