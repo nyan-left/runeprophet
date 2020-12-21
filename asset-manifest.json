@@ -1,17 +1,17 @@
 {
   "files": {
     "main.css": "/runeprophet/static/css/main.0c6cf270.chunk.css",
-    "main.js": "/runeprophet/static/js/main.d9cc96d2.chunk.js",
-    "runtime-main.js": "/runeprophet/static/js/runtime-main.786eeb97.js",
-    "static/js/2.619a54e7.chunk.js": "/runeprophet/static/js/2.619a54e7.chunk.js",
-    "static/js/3.99caecb4.chunk.js": "/runeprophet/static/js/3.99caecb4.chunk.js",
+    "main.js": "/runeprophet/static/js/main.84fb56a5.chunk.js",
+    "runtime-main.js": "/runeprophet/static/js/runtime-main.18f97981.js",
+    "static/js/2.9a9ce321.chunk.js": "/runeprophet/static/js/2.9a9ce321.chunk.js",
+    "static/js/3.32eddeff.chunk.js": "/runeprophet/static/js/3.32eddeff.chunk.js",
     "index.html": "/runeprophet/index.html",
-    "static/js/2.619a54e7.chunk.js.LICENSE.txt": "/runeprophet/static/js/2.619a54e7.chunk.js.LICENSE.txt"
+    "static/js/2.9a9ce321.chunk.js.LICENSE.txt": "/runeprophet/static/js/2.9a9ce321.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.786eeb97.js",
-    "static/js/2.619a54e7.chunk.js",
+    "static/js/runtime-main.18f97981.js",
+    "static/js/2.9a9ce321.chunk.js",
     "static/css/main.0c6cf270.chunk.css",
-    "static/js/main.d9cc96d2.chunk.js"
+    "static/js/main.84fb56a5.chunk.js"
   ]
 }
