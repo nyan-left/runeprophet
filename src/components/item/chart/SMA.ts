@@ -18,7 +18,7 @@ const getSMA = (data : TradeStatsDetails, period = 30) => {
       averages.push([]);
     } else {
       sumForAverage -= (data as any)[i - period].priceDaily;
-      averages.push([(data as any)[i].date, sumForAverage / period]);
+      averages.push([(data as any)[i].date, Math.floor(sumForAverage / period)]);
     }
   }
   return averages;
