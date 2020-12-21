@@ -87,7 +87,7 @@ function DataLoader(props : {itemsList : { id: number; name: string; }[]}) : any
             {item?.name}
           </Link>
         </TableCell>
-        <TableCell align="left">{item?.cost}</TableCell>
+        <TableCell align="left">{item?.buy_limit}</TableCell>
       </TableRow>
     ))
   );
@@ -110,7 +110,7 @@ const SearchResultList = () => {
               <TableRow>
                 <TableCell />
                 <TableCell>Name</TableCell>
-                <TableCell align="left">Price</TableCell>
+                <TableCell>Trade Limit</TableCell>
               </TableRow>
             </TableHead>
             <TableBody style={{ width: '100%' }}>
