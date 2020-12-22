@@ -5,7 +5,15 @@
 /* eslint-disable camelcase */
 import * as tf from '@tensorflow/tfjs';
 
-async function trainModel(X: any, Y: any, n_epochs : number, window_size: number, learning_rate: number, n_layers: number, callback: (arg0: number, arg1: tf.Logs | undefined) => void) {
+async function trainModel(
+  X: number[][],
+  Y: number[],
+  callback: (arg0: number, arg1: tf.Logs | undefined) => void,
+  n_epochs : number = 25,
+  window_size: number = 7,
+  learning_rate: number = 0.01,
+  n_layers: number = 4,
+) {
   const input_layer_shape = window_size;
   const input_layer_neurons = 100;
 
@@ -59,6 +67,8 @@ async function trainModel(X: any, Y: any, n_epochs : number, window_size: number
 
   return { model, stats: hist };
 }
+
+export default trainModel;
 
 function makePredictions(X : any[], model : tf.Sequential) {
   const predictedResults = (model.predict(tf.tensor2d(X, [X.length, X[0].length]).div(tf.scalar(10))) as tf.Tensor<tf.Rank>).mul(10);
