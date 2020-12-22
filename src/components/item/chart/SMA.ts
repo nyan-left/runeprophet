@@ -1,3 +1,4 @@
+/* eslint-disable no-continue */
 import * as OSRS from 'osrs-trade-stats';
 
 type Await<T> = T extends {
@@ -6,19 +7,22 @@ type Await<T> = T extends {
 } ? U : T;
 
 export type TradeStatsDetails = Await<ReturnType<typeof OSRS.getFromWiki>>;
+type Config = {
+  type : 'priceDaily' | 'tradeVolume',
+  period : number
+}
 
-const getSMA = (data : TradeStatsDetails, period = 30) => {
+const getSMA = (data : TradeStatsDetails, config : Config = { type: 'priceDaily', period: 30 }) => {
   const averages = [];
   let sumForAverage = 0;
-
   // eslint-disable-next-line no-plusplus
   for (let i = 0; i < (data as any).length; i++) {
-    sumForAverage += (data as any)[i].priceDaily;
-    if (i < period) {
+    sumForAverage += (data as any)[i][config.type] || 0;
+    if (i < config.period) {
       averages.push([]);
     } else {
-      sumForAverage -= (data as any)[i - period].priceDaily;
-      averages.push([(data as any)[i].date, Math.floor(sumForAverage / period)]);
+      sumForAverage -= (data as any)[i - config.period][config.type] || null;
+      averages.push([(data as any)[i].date, Math.floor(sumForAverage / config.period) || null]);
     }
   }
   return averages;
