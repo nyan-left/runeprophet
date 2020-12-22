@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/runeprophet/static/css/main.0c6cf270.chunk.css",
-    "main.js": "/runeprophet/static/js/main.b5465be9.chunk.js",
+    "main.js": "/runeprophet/static/js/main.175676b6.chunk.js",
     "runtime-main.js": "/runeprophet/static/js/runtime-main.6602d03c.js",
     "static/css/2.013beace.chunk.css": "/runeprophet/static/css/2.013beace.chunk.css",
     "static/js/2.48c06c1f.chunk.js": "/runeprophet/static/js/2.48c06c1f.chunk.js",
@@ -15,6 +15,6 @@
     "static/css/2.013beace.chunk.css",
     "static/js/2.48c06c1f.chunk.js",
     "static/css/main.0c6cf270.chunk.css",
-    "static/js/main.b5465be9.chunk.js"
+    "static/js/main.175676b6.chunk.js"
   ]
 }
