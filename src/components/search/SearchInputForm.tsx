@@ -6,7 +6,6 @@ import React, { useState } from 'react';
 //  import * as OSRS from 'osrs-trade-stats';
 import Button from '@material-ui/core/Button';
 import { Input } from '@material-ui/core';
-import Typography from '@material-ui/core/Typography/Typography';
 import Paper from '@material-ui/core/Paper/Paper';
 import Grid from '@material-ui/core/Grid/Grid';
 import useStore from '../../store/store';
@@ -27,16 +26,13 @@ const SearchInputForm = ({ onSearch } : {onSearch : (text: string) => void}) => 
       <Paper
         elevation={1}
         style={{
-          marginBottom: '20px',
+          marginBottom: '10px',
           maxWidth: '400px',
           paddingLeft: '10px',
           paddingRight: '10px',
         }}
       >
         <div className="App">
-          <Typography variant="h6" component="h2" gutterBottom>
-            Search for an item
-          </Typography>
           <form
             onSubmit={(e) => {
 
@@ -52,7 +48,7 @@ const SearchInputForm = ({ onSearch } : {onSearch : (text: string) => void}) => 
               onSearch(search);
             }}
           >
-            <Input style={{ marginBottom: '20px', marginRight: '15px' }} placeholder="Abyssal whip" onChange={(e) => setSearch(e.target.value)} inputProps={{ 'aria-label': 'description' }} />
+            <Input color="secondary" style={{ marginBottom: '10px', marginRight: '10px' }} placeholder="Abyssal whip" onChange={(e) => setSearch(e.target.value)} inputProps={{ 'aria-label': 'description' }} />
             <Button variant="contained" style={{ backgroundColor: 'orange' }} type="submit" value="search">search</Button>
           </form>
         </div>

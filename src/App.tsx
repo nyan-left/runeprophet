@@ -21,7 +21,7 @@ const App = () => (
       <CssBaseline />
       <div
         style={{
-          marginBottom: '20px',
+          marginBottom: '10px',
           padding: '10px',
         }}
       >

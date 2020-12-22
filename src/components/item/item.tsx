@@ -7,8 +7,10 @@ import {
   useParams,
 } from 'react-router-dom';
 import * as OSRS from 'osrs-trade-stats';
+import Loader from 'react-loader-spinner';
 import Chart from './chart/StockChart';
 import useStore from '../../store/store';
+import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
 
 type Await<T> = T extends {
     then(onfulfilled?: (value: infer U) => unknown): unknown;
@@ -37,7 +39,11 @@ function DataLoader(props :{ id: number }) {
     return () => { didCancel = true; };
   }, [id]);
 
-  return isLoading ? <div>Loading</div> : (
+  return isLoading ? (
+    <div>
+      <Loader type="Hearts" color="orange" height={80} width={80} timeout={2000} />
+    </div>
+  ) : (
     <div>
       <Chart data={data} id={id} />
     </div>
