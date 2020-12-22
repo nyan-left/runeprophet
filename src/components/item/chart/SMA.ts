@@ -19,7 +19,7 @@ const getSMA = (data : TradeStatsDetails, config : Config = { type: 'priceDaily'
   for (let i = 0; i < (data as any).length; i++) {
     sumForAverage += (data as any)[i][config.type] || 0;
     if (i < config.period) {
-      averages.push([]);
+      averages.push([0]);
     } else {
       sumForAverage -= (data as any)[i - config.period][config.type] || null;
       averages.push([(data as any)[i].date, sumForAverage / config.period || null]);
