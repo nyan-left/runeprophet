@@ -263,17 +263,13 @@ const Chart = (props : { data? : TradeStatsDetails, id : number }) => {
       },
     ],
 
-    tooltip: {
-      shared: true,
-    },
-
     series: [
       {
         color: 'green',
         type: 'line',
         name: 'Daily Price',
         data: data?.map((d) => [d.date, d.priceDaily]),
-        tooltip: { valueSuffix: ' gp' },
+        tooltip: { valueSuffix: ' gp', valueDecimals: 0 },
         yAxis: 0,
       },
       {
@@ -281,21 +277,23 @@ const Chart = (props : { data? : TradeStatsDetails, id : number }) => {
         type: 'areaspline',
         name: 'Trade Volume',
         data: data?.map((d) => [d.date, d.tradeVolume]),
+        tooltip: { valueDecimals: 0 },
         yAxis: 1,
       },
       {
         color: 'lightblue',
         type: 'line',
-        name: 'Average Price (SMA-30)',
+        name: 'Average Price',
         data: getSMA(data as TradeStatsDetails, { period: 30, type: 'priceDaily' }),
-        tooltip: { valueSuffix: ' gp' },
+        tooltip: { valueSuffix: ' gp', valueDecimals: 0 },
         yAxis: 0,
       },
       {
         color: 'red',
         type: 'line',
-        name: 'Average Trade Volume (SMA-30)',
+        name: 'Average Volume',
         data: getSMA(data as TradeStatsDetails, { period: 7, type: 'tradeVolume' }),
+        tooltip: { valueDecimals: 0 },
         yAxis: 1,
       },
     ],
