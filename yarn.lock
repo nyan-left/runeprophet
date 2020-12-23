@@ -10475,7 +10475,7 @@
     "ajv" "^6.12.5"
     "ajv-keywords" "^3.5.2"
 
-"seedrandom@~2.4.3":
+"seedrandom@^2.4.4", "seedrandom@~2.4.3":
   "integrity" "sha512-9A+PDmgm+2du77B5i0Ip2cxOqqHjgNxnBgglxLcX78A2D6c2rTo61z4jnVABpF4cKeDMDG+cmXXvdnqse2VqMA=="
   "resolved" "https://registry.npmjs.org/seedrandom/-/seedrandom-2.4.4.tgz"
   "version" "2.4.4"
