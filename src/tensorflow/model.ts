@@ -17,7 +17,7 @@ type SMAResult = {
     }[];
     avg: number;
 }
-
+// some validation data
 function ComputeSMA(data : {price : number, timestamp : Date}[], window_size : number) : SMAResult[] {
   const r_avgs = [];
   let avg_prev = 0;
@@ -132,8 +132,8 @@ async function begin() {
   const inputs = sma_vec.map((inp_f) => inp_f.set.map((val) => val.price));
   const outputs = sma_vec.map((outp_f) => outp_f.avg);
 
-  const result = await trainModel(inputs, outputs, window_size, n_epochs, learningrate, n_hiddenlayers, Callback);
-  console.log(result);
+  // const result = await trainModel(inputs, outputs, window_size, n_epochs, learningrate, n_hiddenlayers, Callback);
+  // console.log(result);
   // may need to reverse
 }
 
