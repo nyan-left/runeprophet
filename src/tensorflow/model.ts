@@ -10,7 +10,7 @@ async function trainModel(
   Y: number[],
   callback: (arg0: number, arg1: tf.Logs | undefined) => void,
   n_epochs : number = 25,
-  window_size: number = 7,
+  window_size: number = 20,
   learning_rate: number = 0.01,
   n_layers: number = 4,
 ) {

@@ -203,7 +203,7 @@ Highcharts.setOptions({ lang: { thousandsSep: ',' } });
 };
 // Apply the theme
 Highcharts.setOptions(Highcharts.theme);
-const Chart = (props : { data? : TradeStatsDetails, id : number }) => {
+const StyledChart = (props : { data? : TradeStatsDetails, id : number }) => {
   const { data, id } = props;
 
   const [osrsboxItem, setOsrsBoxItem] = useState<OsrsboxItem>();
@@ -311,4 +311,4 @@ const Chart = (props : { data? : TradeStatsDetails, id : number }) => {
   );
 };
 
-export default Chart;
+export default StyledChart;
