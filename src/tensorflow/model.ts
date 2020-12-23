@@ -1,18 +1,59 @@
+/* eslint-disable no-multiple-empty-lines */
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-mixed-operators */
 /* eslint-disable no-plusplus */
 /* eslint-disable max-len */
 /* eslint-disable camelcase */
+
+import * as OSRS from 'osrs-trade-stats';
 import * as tf from '@tensorflow/tfjs';
+
+const normalize = (values : number[], max : number) => values.map((value) => value / max);
+
+type SMAResult = {
+    set: {
+        price: number;
+        timestamp: Date;
+    }[];
+    avg: number;
+}
+
+function ComputeSMA(data : {price : number, timestamp : Date}[], window_size : number) : SMAResult[] {
+  const r_avgs = [];
+  let avg_prev = 0;
+  for (let i = 0; i <= data.length - window_size; i++) {
+    let curr_avg = 0.00;
+    const t = i + window_size;
+    for (let k = i; k < t && k <= data.length; k++) {
+      curr_avg += data[k].price / window_size;
+    }
+    r_avgs.push({
+      set: data.slice(i, i + window_size),
+      avg: curr_avg,
+    });
+    avg_prev = curr_avg;
+  }
+  return r_avgs;
+}
+
+const Callback = (epoch: number, log: { loss: any; }) => {
+  const n_epochs = 25;
+  console.log(`epoch ${epoch + 1} / ${n_epochs}`);
+  console.log(`loss: ${log.loss}`);
+  console.log(`${Math.ceil(((epoch + 1) * (100 / n_epochs))).toString()}%`);
+};
+
+
+
 
 async function trainModel(
   X: number[][],
   Y: number[],
-  callback: (arg0: number, arg1: tf.Logs | undefined) => void,
+  window_size : number,
   n_epochs : number = 25,
-  window_size: number = 20,
   learning_rate: number = 0.01,
   n_layers: number = 4,
+  callback: any,
 ) {
   const input_layer_shape = window_size;
   const input_layer_neurons = 100;
@@ -68,9 +109,32 @@ async function trainModel(
   return { model, stats: hist };
 }
 
-export default trainModel;
 
 function makePredictions(X : any[], model : tf.Sequential) {
   const predictedResults = (model.predict(tf.tensor2d(X, [X.length, X[0].length]).div(tf.scalar(10))) as tf.Tensor<tf.Rank>).mul(10);
   return Array.from(predictedResults.dataSync());
 }
+
+
+async function begin() {
+  console.log('starting');
+  const window_size = 20;
+  const n_epochs = 25;
+  const learningrate = 0.01;
+  const n_hiddenlayers = 4;
+  const data = await OSRS.getFromWiki(4151);
+  const pricesArray : number[] = data.map((day) => day.priceDaily);
+  const datesArray : Date[] = data.map((day) => new Date(day.date));
+  const maxPrice : number = Math.max(...pricesArray);
+  const normalizedPrices = normalize(pricesArray, maxPrice);
+
+  const sma_vec = ComputeSMA(data.map((day, i) => ({ timestamp: new Date(day.date), price: normalizedPrices[i] })), window_size);
+  const inputs = sma_vec.map((inp_f) => inp_f.set.map((val) => val.price));
+  const outputs = sma_vec.map((outp_f) => outp_f.avg);
+
+  const result = await trainModel(inputs, outputs, window_size, n_epochs, learningrate, n_hiddenlayers, Callback);
+  console.log(result);
+  // may need to reverse
+}
+
+export default begin;

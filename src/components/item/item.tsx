@@ -8,6 +8,7 @@ import * as OSRS from 'osrs-trade-stats';
 import Chart from './chart/ChartLoader';
 import useStore from '../../store/store';
 import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
+import begin from '../../tensorflow/model';
 
 type Await<T> = T extends {
     then(onfulfilled?: (value: infer U) => unknown): unknown;
@@ -17,7 +18,7 @@ export type TradeStatsDetails = Await<ReturnType<typeof OSRS.getFromWiki>>;
 
 function Item() {
   const { id } = useParams<any>();
-
+  begin();
   const store = useStore.showGraph((state) => state);
   if (!store.showGraph) return null;
   return (
