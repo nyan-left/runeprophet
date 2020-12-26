@@ -5,7 +5,7 @@
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable react/no-children-prop */
 import React, { useEffect, useState } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, withStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -40,6 +40,23 @@ const useStyles = makeStyles({
     minWidth: 100,
   },
 });
+const StyledTableCell = withStyles((theme) => ({
+  head: {
+    backgroundColor: theme.palette.primary.light,
+    color: theme.palette.common.black,
+  },
+  body: {
+    fontSize: 14,
+  },
+}))(TableCell);
+
+const StyledTableRow = withStyles((theme) => ({
+  root: {
+    '&:nth-of-type(odd)': {
+      backgroundColor: theme.palette.action.hover,
+    },
+  },
+}))(TableRow);
 
 function DataLoader(props : {itemsList : { id: number; name: string; }[]}) : any {
   const [isLoading, setIsLoading] = useState(false);
@@ -122,9 +139,9 @@ const SearchResultList = () => {
       <Table className={classes.table} aria-label="simple table">
         <TableHead>
           <TableRow>
-            <TableCell />
-            <TableCell>Name</TableCell>
-            <TableCell>Trade Limit</TableCell>
+            <StyledTableCell />
+            <StyledTableCell>Name</StyledTableCell>
+            <StyledTableCell>Buy Limit</StyledTableCell>
           </TableRow>
         </TableHead>
         <TableBody style={{ width: '100%' }}>
