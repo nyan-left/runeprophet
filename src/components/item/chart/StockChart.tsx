@@ -7,6 +7,9 @@ import HighchartsReact from 'highcharts-react-official';
 import * as OSRS from 'osrs-trade-stats';
 import getSMA from './SMA';
 import theme from './theme';
+import getItemPrediction from '../data/item';
+
+require('highcharts/highcharts-more')(Highcharts);
 
 type Await<T> = T extends {
     then(onfulfilled?: (value: infer U) => unknown): unknown;
@@ -20,7 +23,7 @@ Highcharts.setOptions({ lang: { thousandsSep: ',' } });
 Highcharts.setOptions(Highcharts.theme);
 const StyledChart = (props : { data? : TradeStatsDetails, id : number }) => {
   const { data, id } = props;
-
+  const [predictionData] = useState(getItemPrediction(4151));
   const [osrsboxItem, setOsrsBoxItem] = useState<OsrsboxItem>();
 
   useEffect(() => {
@@ -85,6 +88,24 @@ const StyledChart = (props : { data? : TradeStatsDetails, id : number }) => {
         name: 'Price',
         data: data?.map((d) => [d.date, d.priceDaily]),
         tooltip: { valueSuffix: ' gp', valueDecimals: 0 },
+        yAxis: 0,
+      },
+      {
+        color: 'green',
+        type: 'areasplinerange',
+        name: 'Prediction Range',
+        data: predictionData?.map((d) => [new Date(d.ds), d.yhat_lower, d.yhat_upper]),
+        tooltip: { valueSuffix: ' gp', valueDecimals: 0 },
+        zIndex: -5,
+        yAxis: 0,
+      },
+      {
+        color: 'red',
+        type: 'line',
+        name: 'Prediction',
+        data: predictionData?.map((d) => [new Date(d.ds), d.yhat]),
+        tooltip: { valueSuffix: ' gp', valueDecimals: 0 },
+        zIndex: -2,
         yAxis: 0,
       },
       {
