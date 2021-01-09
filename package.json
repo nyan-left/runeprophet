@@ -9,7 +9,7 @@
     "@material-ui/styles": "^4.11.2",
     "@tensorflow/tfjs": "^2.7.0",
     "@testing-library/jest-dom": "^5.11.4",
-    "@testing-library/react": "^11.1.0",
+    "@testing-library/react": "^11.2.3",
     "fontsource-roboto": "^3.1.5",
     "fuse.js": "^6.4.3",
     "fuzzy-search": "^3.2.1",
