@@ -57,7 +57,7 @@
   "devDependencies": {
     "@testing-library/user-event": "^12.6.0",
     "@types/fuzzy-search": "^2.1.0",
-    "@types/jest": "^26.0.15",
+    "@types/jest": "^29.1.2",
     "@types/node": "^14.14.14",
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
